@@ -27,7 +27,7 @@ const Card = ({
             <button
               disabled={userAnswer ? true : false}
               value={answer}
-              onClick={e => handleClick(e)}
+              onClick={e => handleClick(e, answer?.artist_id)}
             >
               <span>{answer}</span>
             </button>
