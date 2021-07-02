@@ -8,28 +8,33 @@ const Card = ({
   handleClick,
   userAnswer,
   questionNumber,
-  total
+  total,
+  className
 }) => {
-  console.log(answers);
   return (
-    <Container>
+    <Container className={className}>
       <p>
         Question: {questionNumber + 1} / {total}
       </p>
-      <p>{question}</p>
+      <p style={{ fontStyle: "italic" }}>{`"${question}"`}</p>
       <div>
         {answers?.map(answer => (
           <ButtonContainer
-            key={answer}
-            isCorrect={userAnswer?.correctAnswer === answer}
-            userClicked={userAnswer?.answer === answer}
+            key={answer?.artist_id}
+            isCorrect={
+              userAnswer?.isCorrect &&
+              userAnswer?.answerVal === `${answer?.artist_id}`
+            }
+            userClicked={userAnswer?.answerVal === `${answer?.artist_id}`}
           >
             <button
               disabled={userAnswer ? true : false}
-              value={answer}
-              onClick={e => handleClick(e, answer?.artist_id)}
+              value={answer?.artist_id}
+              onClick={e => {
+                handleClick(e, answer?.artist_id);
+              }}
             >
-              <span>{answer}</span>
+              <span>{answer?.artist}</span>
             </button>
           </ButtonContainer>
         ))}

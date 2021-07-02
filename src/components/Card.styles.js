@@ -15,6 +15,7 @@ export const Container = styled.div`
   left: 50%;
   top: 60%;
   transform: translate(-50%, -60%);
+
   p {
     font-size: 1rem;
   }
