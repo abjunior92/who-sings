@@ -7,7 +7,9 @@ const colors = {
   borderBtnStart: "#d38558",
   btnAnswer: "#283593",
   btnSuccess: "#4caf50",
-  btnError: "#c62828"
+  btnError: "#c62828",
+  textBlack: "#000",
+  disabled: "#bdbdbd"
 };
 
 export default colors;

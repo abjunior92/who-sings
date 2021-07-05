@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 // api
 import { fetchChartTracks } from "./api";
 // Styles
@@ -32,6 +32,7 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(0);
   const [name, setName] = useState("");
+  const [restartCard, setRestartCard] = useState(false);
 
   const handleChartTracks = () => {
     async function makeRequest() {
@@ -67,14 +68,25 @@ const App = () => {
     setUserAnswers(prev => [...prev, obj]);
   };
 
-  const next = () => {
-    if (questionNumber + 1 === TOTAL_QUESTIONS - 1) {
-      setGameOver(true);
+  const next = timeOut => {
+    if (timeOut) {
+      setScore(score);
+      const obj = {
+        question: questions[questionNumber]?.lyric,
+        answerVal: "",
+        isCorrect: false
+      };
+      setUserAnswers(prev => [...prev, obj]);
     } else {
-      setQuestionNumber(questionNumber + 1);
-      setGeneratedAnswers(
-        generateAnswers(questions, questions[questionNumber + 1]?.artist_id)
-      );
+      setRestartCard(true);
+      if (questionNumber === TOTAL_QUESTIONS - 1) {
+        setGameOver(true);
+      } else {
+        setQuestionNumber(questionNumber + 1);
+        setGeneratedAnswers(
+          generateAnswers(questions, questions[questionNumber + 1]?.artist_id)
+        );
+      }
     }
   };
 
@@ -135,6 +147,9 @@ const App = () => {
                     }
                     questionNumber={questionNumber}
                     total={TOTAL_QUESTIONS}
+                    nextQuestion={timeOut => next(timeOut)}
+                    restartCard={restartCard}
+                    setRestartCard={value => setRestartCard(value)}
                   />
                 </>
               )}

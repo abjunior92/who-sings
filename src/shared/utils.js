@@ -4,19 +4,21 @@ export const createLyrics = chart => {
   const filter = _.filter(chart, el => {
     return el?.lyric_snippet;
   });
-  return _.reduce(
-    filter,
-    (acc, t) => {
-      return [
-        ...acc,
-        {
-          lyric: t?.lyric_snippet,
-          artist_id: t?.artist_id,
-          artist: t?.artist
-        }
-      ];
-    },
-    []
+  return shuffle(
+    _.reduce(
+      filter,
+      (acc, t) => {
+        return [
+          ...acc,
+          {
+            lyric: t?.lyric_snippet,
+            artist_id: t?.artist_id,
+            artist: t?.artist
+          }
+        ];
+      },
+      []
+    )
   );
 };
 

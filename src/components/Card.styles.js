@@ -21,6 +21,16 @@ export const Container = styled.div`
   }
 `;
 
+export const TimerContainer = styled.div`
+  font-weight: 400;
+  color: ${colors.textBlack};
+  font-size: 26px;
+  text-align: center;
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+`;
+
 export const ButtonContainer = styled.div`
   transition: all 0.3s ease;
   :hover {
@@ -44,5 +54,12 @@ export const ButtonContainer = styled.div`
     border-radius: 10px;
     color: #fff;
     text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+  }
+  button[disabled],
+  button:disabled {
+    cursor: not-allowed;
+  }
+  .timeout {
+    background: ${colors.disabled};
   }
 `;

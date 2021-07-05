@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Styles
-import { Container, ButtonContainer } from "./Card.styles";
+import { Container, ButtonContainer, TimerContainer } from "./Card.styles";
+
+const TOT_SECONDS = 10;
 
 const Card = ({
   question,
@@ -9,8 +11,40 @@ const Card = ({
   userAnswer,
   questionNumber,
   total,
+  nextQuestion,
+  restartCard,
+  setRestartCard,
   className
 }) => {
+  const [seconds, setSeconds] = useState(TOT_SECONDS);
+  const [checked, setChecked] = useState(false);
+  const [timer, setTimer] = useState(null);
+
+  useEffect(() => {
+    if (seconds > 0) {
+      setTimer(setTimeout(() => setSeconds(seconds - 1), 1000));
+    } else if (seconds === "TIME OUT!") {
+      nextQuestion(true);
+    } else {
+      setSeconds("TIME OUT!");
+      clearTimeout(timer);
+    }
+  }, [seconds]);
+
+  useEffect(() => {
+    if (restartCard) {
+      setSeconds(TOT_SECONDS);
+      setRestartCard(false);
+    }
+  }, [restartCard]);
+
+  useEffect(() => {
+    if (checked) {
+      clearTimeout(timer);
+      setChecked(false);
+    }
+  }, [checked]);
+
   return (
     <Container className={className}>
       <p>
@@ -28,9 +62,11 @@ const Card = ({
             userClicked={userAnswer?.answerVal === `${answer?.artist_id}`}
           >
             <button
+              className={`${seconds === "TIME OUT!" ? "timeout" : ""}`}
               disabled={userAnswer ? true : false}
               value={answer?.artist_id}
               onClick={e => {
+                setChecked(true);
                 handleClick(e, answer?.artist_id);
               }}
             >
@@ -39,6 +75,7 @@ const Card = ({
           </ButtonContainer>
         ))}
       </div>
+      <TimerContainer>{seconds}</TimerContainer>
     </Container>
   );
 };
