@@ -12,6 +12,9 @@ export const Container = styled.div`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
   text-align: center;
   position: fixed;
+  @media screen and (max-width: 480px) {
+    top: 70%;
+  }
   left: 50%;
   top: 60%;
   transform: translate(-50%, -60%);
