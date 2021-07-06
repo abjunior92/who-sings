@@ -1,5 +1,10 @@
 import _ from "lodash";
 
+export const userLoggedName = () => {
+  const user = JSON.parse(localStorage.getItem("userLogged"));
+  return user?.name || false;
+};
+
 export const createLyrics = chart => {
   const filter = _.filter(chart, el => {
     return el?.lyric_snippet;
