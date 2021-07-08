@@ -1,3 +1,8 @@
+# Things to know before starting the project
+
+This project use Musixmatch API to get lyrics and artist informations. If you want to see the API on work you have to register at https://developer.musixmatch.com/ and get your personal API key.
+After that, you have to create a file `.env` in the root of the project and set a `REACT_APP_APIKEY` env variable inside with the api key value.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
