@@ -20,6 +20,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { useLocalStorage } from "./hooks/localStorageHook";
+import {
+  addToChartBestPlayers,
+  tracksMaxLastGames,
+  getUserDataIfExist
+} from "./shared/utils";
 
 library.add(
   faCheckSquare,
@@ -33,11 +38,23 @@ library.add(
 const App = () => {
   const [userLogged, setUserLogged, deleteUserLogged] =
     useLocalStorage("userLogged");
+  const [bestPlayers, setBestPlayers] = useLocalStorage("bestPlayers");
+
   const [user, setUser] = useState(null);
+  const [chart, setChart] = useState(null);
 
   useEffect(() => {
-    setUserLogged({ ...userLogged, ...user });
+    setUserLogged({
+      ...userLogged,
+      ...tracksMaxLastGames(getUserDataIfExist(user))
+    });
   }, [user]);
+
+  useEffect(() => {
+    if (chart) {
+      addToChartBestPlayers(chart, setBestPlayers);
+    }
+  }, [chart]);
 
   useEffect(() => {
     setUser(userLogged);
@@ -68,7 +85,14 @@ const App = () => {
           <Route
             path="/"
             render={() => {
-              return <Quiz user={userLogged} setUser={user => setUser(user)} />;
+              return (
+                <Quiz
+                  user={userLogged}
+                  setUser={user => setUser(user)}
+                  chart={bestPlayers}
+                  setChart={chart => setChart(chart)}
+                />
+              );
             }}
           ></Route>
         </Switch>
