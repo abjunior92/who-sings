@@ -13,24 +13,18 @@ export const InputName = styled.input`
 
 export const Greetings = styled.div`
   color: ${colors.text};
-  font-weight: bold;
   font-size: 46px;
   text-align: center;
   margin: 16px;
   display: flex;
+  @media screen and (max-width: 480px) {
+    font-size: 32px;
+    margin: 8px;
+  }
 `;
 
 export const Label = styled.label`
   color: ${colors.text};
-`;
-
-export const Header1 = styled.div`
-  font-weight: 400;
-  color: ${colors.text};
-  font-size: 50px;
-  text-align: center;
-  margin: 20px;
-  display: flex;
 `;
 
 export const Score = styled.div`
@@ -38,8 +32,14 @@ export const Score = styled.div`
   color: ${colors.text};
   font-size: 34px;
   text-align: center;
-  margin: 16px;
+  margin: 8px;
+  padding: 8px;
   display: flex;
+  @media screen and (max-width: 480px) {
+    font-size: 26px;
+    margin: 4px;
+    padding: 4px;
+  }
 `;
 
 export const Button = styled.button`
@@ -86,15 +86,6 @@ export const ButtonNext = styled(Button)``;
 export const ButtonUpper = styled(Button)`
   text-transform: uppercase;
   width: 300px;
-`;
-
-export const ButtonLogout = styled(ButtonUpper)`
-  text-transform: uppercase;
-  width: 300px;
-  position: fixed;
-  left: 50%;
-  top: 90%;
-  transform: translate(-50%, -60%);
 `;
 
 export const Container = styled.div`
