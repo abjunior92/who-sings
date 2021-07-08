@@ -4,8 +4,17 @@ import {
   userLoggedHighScore,
   userLoggedLastGames
 } from "../shared/utils";
-import { Container } from "./UserProfile.styles";
-import { SectionTitle } from "./common/Common.styles";
+import {
+  ContainerTable,
+  Divider,
+  PlayerBody,
+  PlayerCell,
+  PlayerHead,
+  PlayerHeadRow,
+  PlayerRow,
+  PlayerTable,
+  SectionTitle
+} from "./common/Common.styles";
 import _ from "lodash";
 
 const UserProfile = () => {
@@ -14,27 +23,39 @@ const UserProfile = () => {
       !_.isEmpty(results) &&
       _.map(results, res => {
         return (
-          <p style={{ textAlign: "center" }}>{`${res} ${
-            res === 1 ? "pt" : "pts"
-          }`}</p>
+          <PlayerRow>
+            <PlayerCell>{`${res} ${res === 1 ? "pt" : "pts"}`}</PlayerCell>
+          </PlayerRow>
         );
       })
     );
   };
 
   return (
-    <Container>
+    <ContainerTable>
       <SectionTitle>👋 Hi, {userLoggedName()}</SectionTitle>
-
-      <p>
-        This is your high score
-        <p style={{ fontSize: "24px" }}>{userLoggedHighScore() || 0}</p>
-      </p>
-      <p>
-        Last games results
-        {formatResults(userLoggedLastGames()) || <p>no games played yet</p>}
-      </p>
-    </Container>
+      <PlayerTable>
+        <PlayerHead>
+          <PlayerHeadRow>High Score</PlayerHeadRow>
+        </PlayerHead>
+        <PlayerBody>
+          <PlayerRow>
+            <PlayerCell>
+              {userLoggedHighScore() || "no games played yet"}
+            </PlayerCell>
+          </PlayerRow>
+        </PlayerBody>
+      </PlayerTable>
+      <Divider />
+      <PlayerTable>
+        <PlayerHead>
+          <PlayerHeadRow>Last games results</PlayerHeadRow>
+        </PlayerHead>
+        <PlayerBody>
+          {formatResults(userLoggedLastGames()) || "no games played yet"}
+        </PlayerBody>
+      </PlayerTable>
+    </ContainerTable>
   );
 };
 
