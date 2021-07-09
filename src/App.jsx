@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // Router
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 // Components
 import UserProfile from "./components/UserProfile";
 import Chart from "./components/Chart";
@@ -58,6 +58,7 @@ const App = () => {
 
   useEffect(() => {
     setUser(userLogged);
+    setBestPlayers(bestPlayers || []);
   }, []);
 
   const logout = () => {

@@ -52,7 +52,7 @@ export const getUserDataIfExist = user => {
 
 export const addToChartBestPlayers = (player, setBestPlayer) => {
   let bests = JSON.parse(localStorage.getItem("bestPlayers"));
-  if (_.isEmpty(bests) || !player || _.isEmpty(player)) {
+  if (!bests || !player || _.isEmpty(player)) {
     return false;
   } else {
     const foundUser = _.find(bests, p => {

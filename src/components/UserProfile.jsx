@@ -21,9 +21,9 @@ const UserProfile = () => {
   const formatResults = results => {
     return (
       !_.isEmpty(results) &&
-      _.map(results, res => {
+      _.map(results, (res, index) => {
         return (
-          <PlayerRow>
+          <PlayerRow key={index}>
             <PlayerCell>{`${res} ${res === 1 ? "pt" : "pts"}`}</PlayerCell>
           </PlayerRow>
         );
@@ -36,7 +36,9 @@ const UserProfile = () => {
       <SectionTitle>👋 Hi, {userLoggedName()}</SectionTitle>
       <PlayerTable>
         <PlayerHead>
-          <PlayerHeadRow>High Score</PlayerHeadRow>
+          <PlayerRow>
+            <PlayerHeadRow>High Score</PlayerHeadRow>
+          </PlayerRow>
         </PlayerHead>
         <PlayerBody>
           <PlayerRow>
@@ -49,7 +51,9 @@ const UserProfile = () => {
       <Divider />
       <PlayerTable>
         <PlayerHead>
-          <PlayerHeadRow>Last games results</PlayerHeadRow>
+          <PlayerRow>
+            <PlayerHeadRow>Last games results</PlayerHeadRow>
+          </PlayerRow>
         </PlayerHead>
         <PlayerBody>
           {formatResults(userLoggedLastGames()) || "no games played yet"}

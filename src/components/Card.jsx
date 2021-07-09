@@ -34,6 +34,9 @@ const Card = ({
   useEffect(() => {
     if (restartCard) {
       setSeconds(TOT_SECONDS);
+      if (seconds === TOT_SECONDS) {
+        setTimer(setTimeout(() => setSeconds(seconds - 1), 1000));
+      }
       setRestartCard(false);
     }
   }, [restartCard]);

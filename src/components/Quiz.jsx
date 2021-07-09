@@ -25,11 +25,14 @@ import {
 } from "../shared/utils";
 //other libs
 import _ from "lodash";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TOTAL_QUESTIONS = 5;
 
 const Quiz = ({ user, setUser, chart, setChart }) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [gameOver, setGameOver] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [generatedAnswers, setGeneratedAnswers] = useState([]);
@@ -42,6 +45,7 @@ const Quiz = ({ user, setUser, chart, setChart }) => {
   const handleChartTracks = () => {
     async function makeRequest() {
       try {
+        setError(null);
         setLoading(true);
         const dataResponse = await fetchChartTracks();
         const qs = createLyrics(dataResponse);
@@ -49,7 +53,9 @@ const Quiz = ({ user, setUser, chart, setChart }) => {
         setQuestions(qs);
         setGeneratedAnswers(ans);
       } catch (err) {
+        setError(err);
         setLoading(false);
+        toast.error("💥 impossible to get lyrics!");
       } finally {
         setGameOver(false);
         setLoading(false);
@@ -213,6 +219,19 @@ const Quiz = ({ user, setUser, chart, setChart }) => {
               <ButtonNext onClick={() => next()}>
                 {questionNumber === TOTAL_QUESTIONS - 1 ? "End Game" : "Next"}
               </ButtonNext>
+            )}
+            {error && (
+              <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             )}
           </>
         ) : (

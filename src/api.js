@@ -1,5 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
+import reportWebVitals from "./reportWebVitals";
 
 export const apiKey = `${process.env.REACT_APP_APIKEY}`;
 
@@ -49,6 +50,9 @@ export async function fetchChartTracks() {
     })
     .then(function (response) {
       return response;
+    })
+    .catch(function (error) {
+      return error;
     });
 }
 
@@ -62,5 +66,8 @@ async function fetchSnippetLyric(track_id) {
     })
     .then(function (response) {
       return response?.data?.message?.body?.snippet?.snippet_body;
+    })
+    .catch(function (error) {
+      return error;
     });
 }
