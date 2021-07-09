@@ -20,7 +20,7 @@ const Chart = () => {
       _.map(players, (pl, index) => {
         const isPlayerLogged = userLoggedName() === pl?.player;
         return (
-          <PlayerRow>
+          <PlayerRow key={index}>
             <PlayerCell isPlayerLogged={isPlayerLogged}>
               {getMedalFromindex(index)}
             </PlayerCell>
@@ -55,9 +55,11 @@ const Chart = () => {
       <SectionTitle>🔥 Best Players</SectionTitle>
       <PlayerTable>
         <PlayerHead>
-          <PlayerHeadRow>#</PlayerHeadRow>
-          <PlayerHeadRow>Name</PlayerHeadRow>
-          <PlayerHeadRow>Score</PlayerHeadRow>
+          <PlayerRow>
+            <PlayerHeadRow>#</PlayerHeadRow>
+            <PlayerHeadRow>Name</PlayerHeadRow>
+            <PlayerHeadRow>Score</PlayerHeadRow>
+          </PlayerRow>
         </PlayerHead>
         <PlayerBody>{formatPlayers(getChartBestPlayers())}</PlayerBody>
       </PlayerTable>

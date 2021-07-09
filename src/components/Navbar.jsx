@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container } from "./Navbar.styles";
 
 import { NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {
-  BrowserView,
-  MobileView,
-  isBrowser,
-  isMobile,
-  isMobileOnly
-} from "react-device-detect";
+import { BrowserView, MobileView } from "react-device-detect";
 import { userLoggedName } from "../shared/utils";
 
 const getDeviceView = (string, icon) => {

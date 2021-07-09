@@ -3,6 +3,15 @@
 This project use Musixmatch API to get lyrics and artist informations. If you want to see the API on work you have to register at https://developer.musixmatch.com/ and get your personal API key.
 After that, you have to create a file `.env` in the root of the project and set a `REACT_APP_APIKEY` env variable inside with the api key value.
 
+## How to run tests
+
+In the root of the projects run `npm test`. By default, when you run `npm test`, Jest will launch in watch mode. Every time you save a file, it will re-run the tests. You can disable this behavior by passing in the `--watchAll=false` flag.
+In this demo, only two components has been tested (`Quiz.jsx`, `App.jsx`)
+
+## Measuring performance for better user experience
+
+`create-react-app` give you the possibility to test the performance of your app (`reportWebVitals.js`). In the `index.js` file you can see the function to do that.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
