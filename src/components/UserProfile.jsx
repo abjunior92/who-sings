@@ -56,7 +56,9 @@ const UserProfile = () => {
           </PlayerRow>
         </PlayerHead>
         <PlayerBody>
-          {formatResults(userLoggedLastGames()) || "no games played yet"}
+          {formatResults(userLoggedLastGames()) || (
+            <PlayerCell>no games played yet</PlayerCell>
+          )}
         </PlayerBody>
       </PlayerTable>
     </ContainerTable>

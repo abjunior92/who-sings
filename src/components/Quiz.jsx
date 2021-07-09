@@ -48,6 +48,10 @@ const Quiz = ({ user, setUser, chart, setChart }) => {
         setError(null);
         setLoading(true);
         const dataResponse = await fetchChartTracks();
+        if (dataResponse >= 400 && dataResponse <= 500) {
+          setError(dataResponse);
+          throw dataResponse;
+        }
         const qs = createLyrics(dataResponse);
         const ans = generateAnswers(qs, qs[questionNumber]?.artist_id);
         setQuestions(qs);

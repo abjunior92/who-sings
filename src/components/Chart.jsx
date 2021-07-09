@@ -10,6 +10,7 @@ import {
 } from "./common/Common.styles";
 import { SectionTitle } from "./common/Common.styles";
 import { getChartBestPlayers, userLoggedName } from "../shared/utils";
+import { EmptyChartContainer } from "./Chart.styles";
 
 import _ from "lodash";
 
@@ -50,19 +51,28 @@ const Chart = () => {
     }
   };
 
+  const players = getChartBestPlayers();
+  console.log(players);
+
   return (
     <ContainerTable>
       <SectionTitle>🔥 Best Players</SectionTitle>
-      <PlayerTable>
-        <PlayerHead>
-          <PlayerRow>
-            <PlayerHeadRow>#</PlayerHeadRow>
-            <PlayerHeadRow>Name</PlayerHeadRow>
-            <PlayerHeadRow>Score</PlayerHeadRow>
-          </PlayerRow>
-        </PlayerHead>
-        <PlayerBody>{formatPlayers(getChartBestPlayers())}</PlayerBody>
-      </PlayerTable>
+      {!_.isEmpty(players) ? (
+        <PlayerTable>
+          <PlayerHead>
+            <PlayerRow>
+              <PlayerHeadRow>#</PlayerHeadRow>
+              <PlayerHeadRow>Name</PlayerHeadRow>
+              <PlayerHeadRow>Score</PlayerHeadRow>
+            </PlayerRow>
+          </PlayerHead>
+          <PlayerBody>{formatPlayers(getChartBestPlayers())}</PlayerBody>
+        </PlayerTable>
+      ) : (
+        <EmptyChartContainer>
+          Nobody has played the quiz yet
+        </EmptyChartContainer>
+      )}
     </ContainerTable>
   );
 };
