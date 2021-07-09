@@ -1,6 +1,5 @@
 import axios from "axios";
 import _ from "lodash";
-import reportWebVitals from "./reportWebVitals";
 
 export const apiKey = `${process.env.REACT_APP_APIKEY}`;
 
@@ -24,6 +23,9 @@ export async function fetchChartTracks() {
       }
     })
     .then(function (response) {
+      if (response?.data?.message?.header?.status_code !== 200) {
+        throw response?.data?.message?.header?.status_code;
+      }
       const resp = response?.data?.message?.body?.track_list;
 
       const tracks = Promise.resolve(
